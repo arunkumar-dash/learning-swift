@@ -94,12 +94,28 @@ default:
     print("default")
 }
 
-switch (1,1) {
-case (_,1):
+switch (9,8) {
+case let(x,y) where x == y:
+    print("case 0, \(x) and \(y)")
+case (_,1),(9,8):
     print("case 1")
 case (1,_):
     print("case 2")
 default:
     print("default")
+}
+
+//labelled loop, continue, break
+var i=0
+firstLoop: while i<10{
+    i+=1
+    var j=i
+    secondLoop: while j<10{
+        j+=1
+        print("i: \(i)\tj: \(j)")
+        if j%i == 2{
+            break firstLoop
+        }
+    }
 }
 
