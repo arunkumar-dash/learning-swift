@@ -14,3 +14,4 @@ var (x,y,z)=(1,2,3)
 print(x == y ? "x equals y" : (y == z ? "y equals z" : (x == z ? "x equals z" : "nothing matches")))
 
 //comparing tuples
+print((1, "arun") < (2, "kumar"))
