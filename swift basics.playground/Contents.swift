@@ -31,3 +31,7 @@ for _ in 1..<5 {
     print("hii")
 }
 
+let arr : [Int] = [1, 2, 3]
+for i in 0..<arr.count{
+    print(arr[i])
+}
