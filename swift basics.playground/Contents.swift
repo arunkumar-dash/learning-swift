@@ -20,5 +20,14 @@ print( ("arun", 2) < ("kumar", 1) )
 //nil coalescing
 let aOptional : Int? = 45
 print( aOptional != nil ? aOptional! : "nothing" )
+print(aOptional ?? "nothing") //nil coalescing operator
 
-//
+//range
+for _ in 1...5 {
+    print("hi")
+}
+
+for _ in 1..<5 {
+    print("hii")
+}
+
