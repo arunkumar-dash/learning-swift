@@ -11,7 +11,8 @@ print(a&c)
 
 //tuples and ternary operator
 var (x,y,z)=(1,2,3)
-print(x == y ? "x equals y" : (y == z ? "y equals z" : (x == z ? "x equals z" : "nothing matches")))
+print(x == y ? "\(x) equals \(y)" : (y == z ? "\(y) equals \(z)" : (x == z ? "\(x) equals \(z)" : "nothing matches")))
 
 //comparing tuples
-
+print( (1, "arun") < (2, "kumar") )
+print( ("arun", 2) < ("kumar", 1) )
