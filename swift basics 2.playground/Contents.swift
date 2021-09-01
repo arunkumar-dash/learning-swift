@@ -134,5 +134,40 @@ s {
 print(x)
 test()
 
+//enumerators
 
+enum Animal: CaseIterable{
+    case dog
+    case cat
+    case elephant
+}
+
+var pet:Animal = .dog
+
+print(pet)
+
+switch pet{
+case .cat:
+    print("cat")
+default:
+    print("not a cat")
+}
+
+//defer
+
+func function1(_ a: String){
+    defer{
+        print("credits: \(a)")
+    }
+    print("intro")
+    print("fight scene")
+    print("emotional scene")
+    print("climax")
+}
+
+function1("arun")
+
+print(Animal.allCases.count)
+
+//structs and classes
 
