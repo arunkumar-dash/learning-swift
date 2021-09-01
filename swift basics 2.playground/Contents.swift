@@ -57,3 +57,82 @@ func greet3(_ a: String){
 greet3("hello world")
 
 
+//variadic parameters
+
+func varSum(_ arr: Int...) -> Int {
+    var sum: Int = 0
+    for i in arr{
+        sum+=i
+    }
+    return sum
+}
+
+print(varSum(1,2))
+print(varSum(1,2,3,4))
+
+func prefixAdd(a: inout Int) -> Int{
+    a+=1;
+    return a
+}
+
+var temp=21
+print(temp, prefixAdd(a: &temp), temp)
+
+prefix func ++(a: inout Int) -> Int{
+    a+=1
+    return a
+}
+print(temp, ++temp, temp)
+
+//using function references
+
+var prefixAdd1: (inout Int) -> Int = prefixAdd
+
+print(temp, prefixAdd1(&temp))
+
+
+//closures
+
+var strArray : [String] = ["arun", "b", "ar", "fftt", "aru"]
+
+//to sort by length using closures
+
+func lengthCmp(a: String, b: String) -> Bool{
+    return a.count<b.count
+}
+
+print(strArray.sorted(), strArray.sorted(by: lengthCmp))
+
+print(strArray.sorted(by: {(a: String, b: String) -> Bool
+in
+    return a.count<b.count
+}))
+
+print(strArray.sorted(by: {a,b in return a.count>b.count}))
+
+print(strArray.sorted(by: {a,b in a.count<b.count}))
+
+print(strArray.sorted(by: {$0.count > $1.count}))
+
+print(strArray.sorted(by: >))
+
+print(strArray.map({$0.uppercased()}))
+
+//escaping closures
+
+var test: () -> Void = {print("cc")}
+func s(c: @escaping () -> Void){
+    test=c
+    c()
+}
+test()
+var x=7
+s {
+    print("closures are cool")
+    x+=1
+}
+print(x)
+test()
+
+
+
