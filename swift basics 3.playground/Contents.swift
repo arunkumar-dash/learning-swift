@@ -44,3 +44,56 @@ let stepCounter = StepCounter()
 stepCounter.totalSteps = 200
 
 //property wrapper
+@propertyWrapper
+struct Vowel{
+    private var letter: Character = "0"
+    var projectedValue="thiss"
+    var wrappedValue: Character {
+        get{
+            return letter
+        }
+        set{
+            if ["a","e","i","o","u"].contains(newValue){
+                letter=newValue
+            }
+            else{
+                letter="0"
+            }
+        }
+    }
+}
+
+struct Sentence{
+    @Vowel var article1: Character
+}
+
+var articlesTest=Sentence()
+print(articlesTest.article1)
+articlesTest.article1="e"
+print(articlesTest.article1, articlesTest.$article1)
+articlesTest.article1="j"
+print(articlesTest.article1)
+
+//subscripts
+
+struct TimesTable {
+    let multiplier: Int
+    subscript(index: Int) -> Int {
+        return multiplier * index
+    }
+    subscript(inex: String) -> String{ //can override
+        return inex
+    }
+}
+let threeTimesTable = TimesTable(multiplier: 3)
+print("six times three is \(threeTimesTable[6])", threeTimesTable["overloads"])
+
+enum Planet: Int {
+    case mercury = 1, venus, earth, mars, jupiter, saturn, uranus, neptune
+    static subscript(n: Int) -> Planet {
+        return Planet(rawValue: n)!
+    }
+}
+print(Planet[4])
+
+
