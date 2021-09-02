@@ -130,3 +130,160 @@ var objTest = TestDeinit(a: 1)
 objTest = TestDeinit(a: 2)
 
 
+//error handling
+
+enum VendingMachineError: Error {
+    case invalidSelection
+    case insufficientFunds(coinsNeeded: Int)
+    case outOfStock
+}
+
+struct Item {
+    var price: Int
+    var count: Int
+}
+
+class VendingMachine {
+    var inventory = [
+        "Candy Bar": Item(price: 12, count: 7),
+        "Chips": Item(price: 10, count: 4),
+        "Pretzels": Item(price: 7, count: 11)
+    ]
+    var coinsDeposited = 0
+
+    func vend(itemNamed name: String) throws {
+        guard let item = inventory[name] else {
+            throw VendingMachineError.invalidSelection
+        }
+
+        guard item.count > 0 else {
+            throw VendingMachineError.outOfStock
+        }
+
+        guard item.price <= coinsDeposited else {
+            throw VendingMachineError.insufficientFunds(coinsNeeded: item.price - coinsDeposited)
+        }
+
+        coinsDeposited -= item.price
+
+        var newItem = item
+        newItem.count -= 1
+        inventory[name] = newItem
+
+        print("Dispensing \(name)")
+    }
+}
+
+let favoriteSnacks = [
+    "Alice": "Chips",
+    "Bob": "Licorice",
+    "Eve": "Pretzels",
+]
+func buyFavoriteSnack(person: String, vendingMachine: VendingMachine) throws {
+    let snackName = favoriteSnacks[person] ?? "Candy Bar"
+    try vendingMachine.vend(itemNamed: snackName)
+}
+
+var vendingMachine = VendingMachine()
+vendingMachine.coinsDeposited = 8
+do {
+    try buyFavoriteSnack(person: "Alice", vendingMachine: vendingMachine)
+    print("Success! Yum.")
+} catch VendingMachineError.invalidSelection {
+    print("Invalid Selection.")
+} catch VendingMachineError.outOfStock {
+    print("Out of Stock.")
+} catch VendingMachineError.insufficientFunds(let coinsNeeded) {
+    print("Insufficient funds. Please insert an additional \(coinsNeeded) coins.")
+} catch {
+    print("Unexpected error: \(error).")
+}
+
+//async, await
+//actor
+
+//typecast
+
+class Parent{
+    var parent: String
+    init(name: String){
+        self.parent=name
+    }
+    func aa() -> Self{
+        return self
+    }
+}
+
+class GirlChild: Parent{
+    var boyName: String
+    override init(name: String) {
+        self.boyName=name
+        super.init(name: name)
+    }
+}
+
+class BoyChild: Parent{
+    var girlName: String
+    override init(name: String) {
+        self.girlName=name
+        super.init(name: name)
+    }
+}
+
+var sds=Parent(name: "kk").aa()
+type(of: sds)
+
+
+var children=[BoyChild(name: "arun"),GirlChild(name: "priya")]
+
+print(type(of: children))
+
+for i in children{
+    if let name = i as? BoyChild{
+        print(name.girlName)
+    }
+    else if let name = i as? GirlChild{
+        print(name.boyName)
+    }
+}
+print("\u{1F609} 😉")
+
+
+//extensions
+
+extension BoyChild{
+    func sport(){
+        print("Plays")
+    }
+}
+
+extension GirlChild{
+    func studies(){
+        print("Study")
+    }
+}
+
+children.append(BoyChild(name: "newArun"))
+
+if let sport = children[2] as? BoyChild{
+    sport.sport()
+}
+
+protocol Togglable {
+    mutating func toggle()
+}
+
+enum OnOffSwitch: Togglable {
+    case off, on
+    mutating func toggle() {
+        switch self {
+        case .off:
+            self = .on
+        case .on:
+            self = .off
+        }
+    }
+}
+var lightSwitch = OnOffSwitch.off
+lightSwitch.toggle()
+
