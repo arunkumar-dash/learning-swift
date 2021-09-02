@@ -96,4 +96,37 @@ enum Planet: Int {
 }
 print(Planet[4])
 
+class Temp{
+    var far: Double
+    var kel: Double
+    init(_ far: Double){
+        self.far=far
+        self.kel=0
+    }
+    convenience init(kelvin kel: Double) {
+        self.init(0)
+        self.kel=kel
+    }
+}
+var re = Temp(89)
+
+
+//deinitialization
+
+
+class TestDeinit{
+    var a: Int
+    init(a: Int) {
+        self.a=a
+        print("class \(a) is initialized")
+    }
+    deinit {
+        print("class \(self.a) is deinitialized")
+    }
+}
+
+var objTest = TestDeinit(a: 1)
+
+objTest = TestDeinit(a: 2)
+
 
