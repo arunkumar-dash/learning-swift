@@ -287,3 +287,13 @@ enum OnOffSwitch: Togglable {
 var lightSwitch = OnOffSwitch.off
 lightSwitch.toggle()
 
+//generics which should have parent protocol
+
+func printSport<T : Parent>(T:T){
+    if let a=T as? BoyChild{
+        a.sport()
+    }
+}
+printSport(T: children[0])
+
+//associatedtype typealias
